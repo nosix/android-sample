@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".drawer.DrawerActivity">
+
+    <!--
+     先に記述された方が z 軸で下になるため、コンテンツを先に記述する
+    -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--
+         マテリアルデザインの仕様では、elevation は 4dp になっている (elevation は API 21 から)
+         theme は Toolbar のテーマ
+         popupTheme はメニューをポップアップしたときのテーマ
+        -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            tools:targetApi="lollipop" />
+
+        <!-- メインコンテンツ -->
+        <FrameLayout
+            android:id="@+id/contentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <!--
+     width は、コンテンツを確認できる様にするため 320dp 以内にする
+     height は、コンテンツと同じにする
+    -->
+    <ListView
+        android:id="@+id/drawer"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="start"
+        android:layout_width="240dp"
+        android:layout_height="match_parent" />
+
+</android.support.v4.widget.DrawerLayout>

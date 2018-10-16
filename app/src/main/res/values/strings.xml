@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ViewSample</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="button_label_delete">Delete</string>
+    <string name="item_text_prefix">Item</string>
+</resources>

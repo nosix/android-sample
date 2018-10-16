@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.view.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewpager.ViewPagerActivity">
+
+    <!--
+      属性が、補完候補/Design属性に表示されないので注意
+      layout_gravity のデフォルトは top
+
+      PagerTabStrip
+        https://dev.classmethod.jp/smartphone/android/android-tips-36-pagertabstrip/
+      PagerTitleStrip
+        non-interactive indicator らしい
+      PagerSlidingTabStrip
+        https://github.com/astuetz/PagerSlidingTabStrip
+     -->
+    <android.support.v4.view.PagerTabStrip
+        android:id="@+id/pagerTabStrip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="12dp"
+        android:background="@color/colorPrimaryDark" />
+
+</android.support.v4.view.ViewPager>

@@ -1,0 +1,17 @@
+<resources>
+
+    <!--
+     ActionBar ではなく、サポートライブラリの Toolbar を使うには、テーマに NoActionBar を指定する
+
+     ActionBar は Android システムとバージョンによって動作が異なる
+     Toolbar には最新の機能が追加されていてバージョン間での違いがない
+     see: https://developer.android.com/training/appbar/setting-up?hl=ja
+    -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>
