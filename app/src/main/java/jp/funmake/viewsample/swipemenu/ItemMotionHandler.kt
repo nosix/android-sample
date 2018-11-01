@@ -215,8 +215,6 @@ class ItemMotionHandler private constructor() : ItemTouchHelper.Callback() {
                 // backgroundを固定して、foregroundだけを動かす
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.background, 0f, 0f, actionState, isCurrentlyActive)
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.foreground, x, dY, actionState, isCurrentlyActive)
-
-                unlockForeground(holder)
             }
         }
     }
