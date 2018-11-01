@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <!--
+          Image Asset として ic_delete を追加しておく
+          minWidth は横幅を狭くするために設定
+          padding は画像と View の枠の間の隙間
+          margin は View の枠の外側の隙間
+          layout_height は foreground を基準にする場合は 0dp (match constraint)
+          background の高さを基準にするので wrap_content に設定
+        -->
+        <ImageButton
+            android:id="@+id/buttonDelete"
+            android:src="@drawable/ic_delete"
+            android:scaleType="center"
+            android:minWidth="0dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:tint="@android:color/white"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <!--
+      background の表示を確認する場合は、android:visibility="invisible" を追加
+      app:cardUseCompatPadding には com.android.support:design が必要
+      true に設定するとカードの周囲に影と隙間をつくる
+      constraintTop/Bottom は background の上端/下端に合わせるため
+      foreground の高さを基準にする場合には、background 側に constraintTop/Bottom を設定する
+    -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/foreground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            tools:text="Text"
+            />
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

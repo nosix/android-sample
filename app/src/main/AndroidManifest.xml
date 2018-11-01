@@ -25,6 +25,7 @@
         <activity android:name=".constraint.ConstraintLayoutActivity" />
         <activity android:name=".viewpager.ViewPagerActivity" />
         <activity android:name=".drawer.DrawerActivity" />
+        <activity android:name=".swipemenu.SwipeMenuActivity" />
     </application>
 
 </manifest>
