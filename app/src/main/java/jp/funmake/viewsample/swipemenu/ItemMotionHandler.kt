@@ -135,14 +135,6 @@ class ItemMotionHandler private constructor() : ItemTouchHelper.Callback() {
 
         // 右方向にSwipeした場合
         if (direction == ItemTouchHelper.END) {
-            mLockedForeground?.let {
-                // 固定を入れ替えるために、固定済みのItemを解除する
-                if (it != foreground) {
-                    getDefaultUIUtil().clearView(it)
-                    mLockedForeground = null
-                }
-            }
-
             // Itemを固定する
             mLockedForeground = foreground
             foreground.addOnLayoutChangeListener(mUnlockForeground)
@@ -189,9 +181,14 @@ class ItemMotionHandler private constructor() : ItemTouchHelper.Callback() {
         val holder = viewHolder.cast()
 
         when {
-            dX == 0f -> { // Drag(移動)
+            dX == 0f -> { // Drag(移動) or 横移動の終端
                 // itemViewを動かす
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.itemView, dX, dY, actionState, isCurrentlyActive)
+
+                // 縦移動の場合は、固定を解除する
+                if (dY != 0f) {
+                    unlockForeground(holder, isForce = true)
+                }
             }
             dX > 0f -> { // Swipe(メニュー表示)
                 // 固定している場合は何もしない
@@ -204,6 +201,8 @@ class ItemMotionHandler private constructor() : ItemTouchHelper.Callback() {
                 // backgroundを固定して、foregroundだけを動かす
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.background, 0f, 0f, actionState, isCurrentlyActive)
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.foreground, x, dY, actionState, isCurrentlyActive)
+
+                unlockForeground(holder)
             }
             dX < 0f -> { // Swipe(元に戻す)
                 // 固定していない場合は何もしない
@@ -216,6 +215,18 @@ class ItemMotionHandler private constructor() : ItemTouchHelper.Callback() {
                 // backgroundを固定して、foregroundだけを動かす
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.background, 0f, 0f, actionState, isCurrentlyActive)
                 getDefaultUIUtil().onDraw(c, recyclerView, holder.foreground, x, dY, actionState, isCurrentlyActive)
+
+                unlockForeground(holder)
+            }
+        }
+    }
+
+    private fun unlockForeground(selected: LayeredViewHolder, isForce: Boolean = false) {
+        // 固定を入れ替えるために、固定済みのItemを解除する
+        mLockedForeground?.let {
+            if (it != selected.foreground || isForce) {
+                getDefaultUIUtil().clearView(it)
+                mLockedForeground = null
             }
         }
     }
