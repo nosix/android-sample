@@ -5,17 +5,12 @@ import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.RecyclerView
-import android.transition.ChangeBounds
-import android.transition.Transition
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import jp.funmake.viewsample.R
 import jp.funmake.viewsample.log
-import org.jetbrains.anko.AnkoLogger
+import kotlinx.android.synthetic.main.recycler_row_base.view.itemText
 import org.jetbrains.anko.debug
 
 class RecyclerViewAdapter(val items: List<Item>)
@@ -48,32 +43,29 @@ class RecyclerViewAdapter(val items: List<Item>)
 
     class ViewHolder(val container: ConstraintLayout) : RecyclerView.ViewHolder(container) {
 
-        private val itemButton: Button
-            get() = container.findViewById(R.id.itemButton)
-        private val itemText: TextView
-            get() = container.findViewById(R.id.itemText)
-
         @TargetApi(Build.VERSION_CODES.KITKAT)
         fun bind(item: Item, onClickListener: (View) -> Unit) {
             log.debug( "bind($item)")
-            itemText.text = item.title
-            container.setOnClickListener(onClickListener)
-            val layout =
-                    if (item.isSelected)
-                        R.layout.recycler_row_del
-                    else
-                        R.layout.recycler_row_base
-            log.debug { container.isLaidOut }
-            ConstraintSet().run {
-                // 制約の集合に、レイアウトリソースで設定された制約を複製する
-                clone(container.context, layout)
-                // アニメーションをカスタマイズする場合に使うが
-                // container.isLaidOut が true にならないため
-                // カスタマイズが有効にならない
-                //TransitionManager.beginDelayedTransition(container, ChangeBounds())
+            itemView.run {
+                itemText.text = item.title
+                container.setOnClickListener(onClickListener)
+                val layout =
+                        if (item.isSelected)
+                            R.layout.recycler_row_del
+                        else
+                            R.layout.recycler_row_base
+                log.debug { container.isLaidOut }
+                ConstraintSet().run {
+                    // 制約の集合に、レイアウトリソースで設定された制約を複製する
+                    clone(container.context, layout)
+                    // アニメーションをカスタマイズする場合に使うが
+                    // container.isLaidOut が true にならないため
+                    // カスタマイズが有効にならない
+                    //TransitionManager.beginDelayedTransition(container, ChangeBounds())
 
-                // 制約を適用すると自動的にアニメーションする
-                applyTo(container)
+                    // 制約を適用すると自動的にアニメーションする
+                    applyTo(container)
+                }
             }
         }
     }
